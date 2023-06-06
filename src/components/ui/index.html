@@ -1,203 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HEARTSENSE Monitor Holter</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plotly.js-dist@latest/plotly.min.css" />
-	<style>
-	  body {
-		font-family: 'Montserrat', sans-serif;
-		background-color: #F9F9F9;
-		margin: 0;
-		padding: 0;
-	  }
-  
-	  .navbar {
-		background-color: #ffffff;
-		padding: 10px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	  }
-  
-	  .navbar-logo {
-		font-weight: 500;
-		font-size: 24px;
-		color: #333333;
-	  }
-  
-	  .navbar-menu {
-		display: flex;
-		align-items: center;
-	  }
-  
-	  .navbar-menu-item {
-		margin-left: 20px;
-		color: #333333;
-		text-decoration: none;
-		font-weight: 400;
-		transition: color 0.3s ease;
-	  }
-  
-	  .navbar-menu-item:hover {
-		color: #FF3860;
-	  }
-  
-	  .help-icon {
-		color: #333333;
-		font-size: 20px;
-		margin-left: 20px;
-		cursor: pointer;
-		transition: color 0.3s ease;
-	  }
-  
-	  .help-icon:hover {
-		color: #FF3860;
-	  }
-  
-	  .monitor {
-		width: 400px;
-		height: 300px;
-		background-color: #ffffff;
-		border-radius: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-		overflow: hidden;
-		position: relative;
-	  }
-  
-	  .pulse {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background-color: #FF3860;
-		opacity: 0;
-		animation: pulseAnimation 1s infinite;
-	  }
-  
-	  @keyframes pulseAnimation {
-		0% {
-		  transform: scale(1);
-		  opacity: 0;
-		}
-		50% {
-		  transform: scale(1.2);
-		  opacity: 0.7;
-		}
-		100% {
-		  transform: scale(1);
-		  opacity: 0;
-		}
-	  }
-  
-	  .reading {
-		font-size: 32px;
-		text-align: center;
-		margin-top: 20px;
-		font-weight: 500;
-		color: #333333;
-	  }
-	</style>
-  </head>
-  <body>
-	<nav class="navbar">
-	  <div class="navbar-logo">HEARTSENSE</div>
-	  <div class="navbar-menu">
-		<a href="#" class="navbar-menu-item">Estado del Holter</a>
-		<a href="#" class="navbar-menu-item">Borrar SD</a>
-		<a href="#" class="navbar-menu-item">Iniciar Holter</a>
-		<a href="#" class="navbar-menu-item">Analizar Datos</a>
-		<i class="fas fa-question-circle help-icon" id="helpIcon"></i>
-	  </div>
-	</nav>
-  
-	<div class="monitor">
-	  <div class="pulse"></div>
-	  <div class="reading">Heart Rate: <span id="heartRate">0</span> bpm</div>
-	</div>
-  
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-	<script type="text/javascript">
-	  // TypeScript code
-	  class HeartSenseMonitor {
-		private heartRateElement: HTMLSpanElement;
-		private pulseElement: HTMLDivElement;
-		private heartRate: number;
-  
-		constructor(heartRateElement: HTMLSpanElement, pulseElement: HTMLDivElement) {
-		  this.heartRateElement = heartRateElement;
-		  this.pulseElement = pulseElement;
-		  this.heartRate = 0;
-		}
-  
-		setHeartRate(heartRate: number) {
-		  this.heartRate = heartRate;
-		  this.heartRateElement.innerText = heartRate.toString();
-		  this.pulseElement.style.opacity = '1';
-		}
-	  }
-  
-	  // Create an instance of HeartSenseMonitor
-	  const heartRateElement = document.getElementById('heartRate');
-	  const pulseElement = document.querySelector('.pulse');
-	  const heartSenseMonitor = new HeartSenseMonitor(heartRateElement, pulseElement);
-  
-	  // Simulate heart rate readings
-	  setInterval(() => {
-		const randomHeartRate = Math.floor(Math.random() * 100) + 60;
-		heartSenseMonitor.setHeartRate(randomHeartRate);
-		setTimeout(() => {
-		  heartSenseMonitor.pulseElement.style.opacity = '0';
-		}, 500);
-	  }, 2000);
-	  
-	  const helpIcon = document.getElementById("helpIcon");
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo">HEARTSENSE</div>
+    <div class="navbar-menu">
+      <a href="#" class="navbar-menu-item">Estado del Holter</a>
+      <a href="#" class="navbar-menu-item">Borrar SD</a>
+      <a href="#" class="navbar-menu-item">Iniciar Holter</a>
+      <a href="#" class="navbar-menu-item">Analizar Datos</a>
+      <i class="fas fa-question-circle help-icon" id="helpIcon"></i>
+    </div>
+  </nav>
 
-helpIcon.addEventListener("click", function() {
-  window.tauri.open("help.html");
-});
+  <div class="monitor">
+    <div class="pulse"></div>
+    <div class="reading">Heart Rate: <span id="heartRate">0</span> bpm</div>
+  </div>
 
-	  // Function to handle menu item clicks
-	  function handleMenuItemClick(event) {
-		event.preventDefault();
-		const menuItem = event.target.innerText;
-		
-		// Handle different menu item actions here
-		switch (menuItem) {
-		  case 'Estado del Holter':
-			// Code for handling 'Estado del Holter' menu item
-			break;
-		  case 'Borrar SD':
-			// Code for handling 'Borrar SD' menu item
-			break;
-		  case 'Iniciar Holter':
-			// Code for handling 'Iniciar Holter' menu item
-			break;
-		  case 'Analizar Datos':
-			// Code for handling 'Analizar Datos' menu item
-			break;
-		  default:
-			break;
-		}
-	  }
-  
-	  // Add event listeners to menu items
-	  const menuItems = document.getElementsByClassName('navbar-menu-item');
-	  Array.from(menuItems).forEach((menuItem) => {
-		menuItem.addEventListener('click', handleMenuItemClick);
-	  });
-	</script>
-
-  </body>
-  </html>
-  
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
