@@ -1,5 +1,8 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+// Prevents additional console window on Windows in release
+#![cfg_attr(
+    all(not(debug_assertions), target_os = "windows"),
+    windows_subsystem = "windows"
+)]
 
 use std::process::Command;
 use std::str;
@@ -8,16 +11,17 @@ use std::io::prelude::*;
 use std::path::Path;
 
 
+
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![greet, ls, button, button1])
+    .invoke_handler(tauri::generate_handler![greet, ls, button1])
     .run(tauri::generate_context!())
-    .expect("error while running tauri application");
+    .expect("ERROR -> mientras corria la aplicación");
 }
 
 #[tauri::command]
 fn greet(name: &str) -> String {
-   format!("Holii, {}!", name)
+   format!("Hola, {}!", name)
 }
 
 #[tauri::command]
@@ -43,10 +47,6 @@ impl ToHTML for String {
         self.replace("\n", "<br>")
     }
 }
-
-#[tauri::command]
-fn button() -> String {
-    format!("Apretaste el botón!!")}
 
 #[tauri::command]
 fn button1() -> String {
