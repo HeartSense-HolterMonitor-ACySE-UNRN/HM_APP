@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+
+	<script>const { invoke } = window.__TAURI__.tauri;</script>
+	<script src="menu.js" defer></script>
+	<script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+	<script src="holter.js" defer></script>
+</head>
+
+<body>
+	<div id="menu">
+		<div class="logo">
+			<span class="name">HEARTSENSE ML</span>
+		</div>
+		<button id="inicio">Iniciar Holter</button>
+		<button id="ayuda">Ayuda</button>
+		<button id="holter">Analizar Datos</button>
+		<button id="borrar">Borrar Datos</button>
+		<button id="estado">Ver Estado</button>
+	</div>
+
+	<div id="content">
+		<!-- Contenido inicial -->
+		<h2>Bienvenido/a a HeartSense Application</h2>
+		<p>Seleccione una opción del menú de arriba para comenzar a operar con el dispositivo</p>
+		<p>Si tiene alguna duda/problema vaya a la sección "Ayuda"</p>
+	</div>
+
+</body>
+
+</html>

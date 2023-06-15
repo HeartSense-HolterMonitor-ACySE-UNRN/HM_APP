@@ -2,13 +2,13 @@
   "build": {
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
-    "devPath": "../src/components/ui",
-    "distDir": "../src/components/ui",
+    "devPath": "../ui",
+    "distDir": "../ui",
 	 "withGlobalTauri": true
   },
   "package": {
-    "productName": "heart_sense_app",
-    "version": "0.1.0"
+    "productName": "HeartSense Application",
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -58,7 +58,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "HeartSense - Application",
+        "title": "HeartSense Application",
         "width": 800
       }
     ]
